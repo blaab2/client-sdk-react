@@ -26778,6 +26778,7 @@ function gv() {
       "hybrid-empty-message": "hybridEmptyMessage",
       // Chat Configuration
       "chat-first-message": "chatFirstMessage",
+      "chat-end-message": "chatEndMessage",
       "chat-placeholder": "chatPlaceholder",
       // Voice Configuration
       "voice-show-transcript": "voiceShowTranscript",
