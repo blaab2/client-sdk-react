@@ -1,0 +1,224 @@
+/**
+ * Every piece of UI text the widget renders on its own — status line,
+ * button labels and tooltips — as opposed to content that already has a
+ * dedicated prop (`title`, `chatPlaceholder`, `chatEmptyMessage`,
+ * `consentTitle`, `consentContent`, `chatEndMessage`, ...). Pass any subset
+ * through the `labels` prop to localize the widget; keys you leave out keep
+ * their English default.
+ */
+export interface WidgetLabels {
+    /** While a voice call is being established. Also the voice button text and the hybrid call button tooltip. */
+    connecting: string;
+    assistantSpeaking: string;
+    listening: string;
+    assistantTyping: string;
+    /** Chat mode, once the conversation has started */
+    chatActive: string;
+    /** Hybrid mode, once the conversation has started */
+    readyToAssist: string;
+    /** Voice mode, once the conversation has started */
+    connected: string;
+    /** Voice mode, before the first call */
+    voiceIdle: string;
+    /** Chat mode, before the first message */
+    chatIdle: string;
+    /** Hybrid mode, before the first interaction */
+    hybridIdle: string;
+    endChat: string;
+    /** Tooltip of the reset button */
+    resetConversation: string;
+    /** Tooltip of the close button, and the close button after a chat has ended */
+    close: string;
+    startNewChat: string;
+    consentAccept: string;
+    consentCancel: string;
+    sendMessage: string;
+    muteMicrophone: string;
+    unmuteMicrophone: string;
+    startVoiceCall: string;
+    stopVoiceCall: string;
+}
+export interface VapiWidgetProps {
+    apiUrl?: string;
+    publicKey: string;
+    assistantId?: string;
+    assistant?: any;
+    assistantOverrides?: any;
+    position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'bottom-center';
+    size?: 'tiny' | 'compact' | 'full';
+    borderRadius?: 'none' | 'small' | 'medium' | 'large';
+    mode?: 'voice' | 'chat' | 'hybrid';
+    theme?: 'light' | 'dark';
+    baseBgColor?: string;
+    accentColor?: string;
+    ctaButtonColor?: string;
+    ctaButtonTextColor?: string;
+    title?: string;
+    startButtonText?: string;
+    endButtonText?: string;
+    ctaTitle?: string;
+    ctaSubtitle?: string;
+    voiceEmptyMessage?: string;
+    voiceActiveEmptyMessage?: string;
+    chatEmptyMessage?: string;
+    hybridEmptyMessage?: string;
+    chatFirstMessage?: string;
+    chatPlaceholder?: string;
+    chatEndMessage?: string;
+    voiceShowTranscript?: boolean;
+    voiceAutoReconnect?: boolean;
+    voiceReconnectStorage?: 'session' | 'cookies';
+    reconnectStorageKey?: string;
+    consentRequired?: boolean;
+    consentTitle?: string;
+    consentContent?: string;
+    consentStorageKey?: string;
+    /** Overrides for the widget's built-in UI strings; see `WidgetLabels` */
+    labels?: Partial<WidgetLabels>;
+    onVoiceStart?: () => void;
+    onVoiceEnd?: () => void;
+    onMessage?: (message: any) => void;
+    onError?: (error: Error) => void;
+    /** @deprecated Use `borderRadius` instead */
+    radius?: 'none' | 'small' | 'medium' | 'large';
+    /** @deprecated Use `baseBgColor` instead */
+    baseColor?: string;
+    /** @deprecated Use `ctaButtonColor` instead */
+    buttonBaseColor?: string;
+    /** @deprecated Use `ctaButtonTextColor` instead */
+    buttonAccentColor?: string;
+    /** @deprecated Use `title` instead */
+    mainLabel?: string;
+    /** @deprecated Use `voiceEmptyMessage` instead */
+    emptyVoiceMessage?: string;
+    /** @deprecated Use `voiceActiveEmptyMessage` instead */
+    emptyVoiceActiveMessage?: string;
+    /** @deprecated Use `chatEmptyMessage` instead */
+    emptyChatMessage?: string;
+    /** @deprecated Use `hybridEmptyMessage` instead */
+    emptyHybridMessage?: string;
+    /** @deprecated Use `chatFirstMessage` instead */
+    firstChatMessage?: string;
+    /** @deprecated Use `voiceShowTranscript` instead */
+    showTranscript?: boolean;
+    /** @deprecated Use `consentRequired` instead */
+    requireConsent?: boolean;
+    /** @deprecated Use `consentContent` instead */
+    termsContent?: string;
+    /** @deprecated Use `consentStorageKey` instead */
+    localStorageKey?: string;
+    /** @deprecated Use `onVoiceStart` instead */
+    onCallStart?: () => void;
+    /** @deprecated Use `onVoiceEnd` instead */
+    onCallEnd?: () => void;
+}
+export interface ColorScheme {
+    baseColor: string;
+    accentColor: string;
+    ctaButtonColor: string;
+    ctaButtonTextColor: string;
+}
+export interface StyleConfig {
+    size: 'tiny' | 'compact' | 'full';
+    radius: 'none' | 'small' | 'medium' | 'large';
+    theme: 'light' | 'dark';
+}
+export interface VolumeIndicatorProps {
+    volumeLevel: number;
+    isCallActive: boolean;
+    isSpeaking: boolean;
+    theme: 'light' | 'dark';
+}
+export interface FloatingButtonProps {
+    isCallActive: boolean;
+    connectionStatus: 'disconnected' | 'connecting' | 'connected';
+    isSpeaking: boolean;
+    isTyping: boolean;
+    volumeLevel: number;
+    onClick: () => void;
+    onToggleCall?: () => void;
+    mainLabel: string;
+    ctaTitle?: string;
+    ctaSubtitle?: string;
+    colors: ColorScheme;
+    styles: StyleConfig;
+    mode: 'voice' | 'chat' | 'hybrid';
+}
+export interface WidgetHeaderProps {
+    mode: 'voice' | 'chat' | 'hybrid';
+    connectionStatus: 'disconnected' | 'connecting' | 'connected';
+    isCallActive: boolean;
+    isSpeaking: boolean;
+    isTyping: boolean;
+    hasActiveConversation: boolean;
+    mainLabel: string;
+    onClose: () => void;
+    onReset: () => void;
+    onChatComplete: () => void;
+    showEndChatButton?: boolean;
+    colors: ColorScheme;
+    styles: StyleConfig;
+    labels: WidgetLabels;
+}
+export interface ConversationMessageProps {
+    role: 'user' | 'assistant' | 'tool';
+    content: string;
+    colors: ColorScheme;
+    styles: StyleConfig;
+    isLoading?: boolean;
+}
+export interface MarkdownMessageProps {
+    content: string;
+    isLoading?: boolean;
+    role: 'user' | 'assistant' | 'tool';
+}
+export interface EmptyConversationProps {
+    mode: 'voice' | 'chat' | 'hybrid';
+    isCallActive: boolean;
+    theme: 'light' | 'dark';
+    voiceEmptyMessage: string;
+    voiceActiveEmptyMessage: string;
+    chatEmptyMessage: string;
+    hybridEmptyMessage: string;
+}
+export interface VoiceControlsProps {
+    isCallActive: boolean;
+    connectionStatus: 'disconnected' | 'connecting' | 'connected';
+    isAvailable: boolean;
+    isMuted: boolean;
+    onToggleCall: () => void;
+    onToggleMute: () => void;
+    startButtonText: string;
+    endButtonText: string;
+    colors: ColorScheme;
+    labels: WidgetLabels;
+}
+export interface ChatControlsProps {
+    chatInput: string;
+    isAvailable: boolean;
+    onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onSendMessage: () => void;
+    colors: ColorScheme;
+    styles: StyleConfig;
+    inputRef?: React.RefObject<HTMLInputElement>;
+    placeholder?: string;
+    labels: WidgetLabels;
+}
+export interface HybridControlsProps {
+    chatInput: string;
+    isCallActive: boolean;
+    connectionStatus: 'disconnected' | 'connecting' | 'connected';
+    isChatAvailable: boolean;
+    isVoiceAvailable: boolean;
+    isMuted: boolean;
+    onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onSendMessage: () => void;
+    onToggleCall: () => void;
+    onToggleMute: () => void;
+    colors: ColorScheme;
+    styles: StyleConfig;
+    inputRef?: React.RefObject<HTMLInputElement>;
+    placeholder?: string;
+    labels: WidgetLabels;
+}
+//# sourceMappingURL=types.d.ts.map
