@@ -167,6 +167,7 @@ function initializeWidgets() {
 
       // Chat Configuration
       'chat-first-message': 'chatFirstMessage',
+      'chat-end-message': 'chatEndMessage',
       'chat-placeholder': 'chatPlaceholder',
 
       // Voice Configuration
